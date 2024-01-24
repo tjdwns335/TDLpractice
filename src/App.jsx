@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [todoList, setTodoList] = useState([
     { id: 1, title: '리엑트 공부', detail: '공부합시다', isDone: false },
-    { id: 2, title: '리엑트 공부', detail: '공부합시다', isDone: true }
+    { id: 2, title: '리엑트 공부', detail: '공부합시다', isDone: true },
   ]);
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
@@ -26,6 +26,16 @@ function App() {
   const detailChange = (e) => {
     const detailValue = e.target.value;
     setDetail(detailValue);
+  }
+  const removeHandler = (id) => {
+    const newTodoList = todoList.filter((todoList) => todoList.id !== id);
+    setTodoList(newTodoList);
+  }
+  const doneClick = (id) => {
+    const newTodo = todoList.map((item) => {
+      return item.id !== id ? { ...item, isDone: !item.isDone } : item
+    })
+    setTodoList(newTodo);
   }
 
   return (
@@ -49,14 +59,22 @@ function App() {
         <button onClick={(e) => addHandler(e)}>추가하기</button>
       </form>
       <div>
-        <h3>{title}</h3>
-        <p>{detail}</p>
-        <div>
-          <button>삭제</button>
-          <button>완료</button>
-        </div>
+        {
+          todoList.map((item) => {
+            return (
+              <>
+                <h3>{item.title}</h3>
+                <p>{item.detail}</p>
+                <div>
+                  <button onClick={() => removeHandler(item.id)}>삭제</button>
+                  <button onClick={() => doneClick(item.id)}>{item.isDone ? "취소" : "완료"}</button>
+                </div>
+              </>
+            )
+          })
+        }
       </div>
-    </div>
+    </div >
   )
 }
 
