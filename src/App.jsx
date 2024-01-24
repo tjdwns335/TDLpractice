@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [todoList, setTodoList] = useState([
     { id: 1, title: '리엑트 공부', detail: '공부합시다', isDone: false },
-    { id: 2, title: '리엑트 공부', detail: '공부합시다', isDone: true },
+    { id: 2, title: 'test', detail: 'test', isDone: true },
   ]);
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
@@ -33,7 +33,7 @@ function App() {
   }
   const doneClick = (id) => {
     const newTodo = todoList.map((item) => {
-      return item.id !== id ? { ...item, isDone: !item.isDone } : item
+      return item.id === id ? { ...item, isDone: !item.isDone } : item
     })
     setTodoList(newTodo);
   }
@@ -58,18 +58,19 @@ function App() {
         />
         <button onClick={(e) => addHandler(e)}>추가하기</button>
       </form>
-      <div>
+      <div className='todo-warp'>
         {
           todoList.map((item) => {
             return (
-              <>
+              <div className='todo-list' key={item.id}>
+                <h2>{item.isDone ? "done" : "Working"}</h2>
                 <h3>{item.title}</h3>
                 <p>{item.detail}</p>
                 <div>
                   <button onClick={() => removeHandler(item.id)}>삭제</button>
                   <button onClick={() => doneClick(item.id)}>{item.isDone ? "취소" : "완료"}</button>
                 </div>
-              </>
+              </div>
             )
           })
         }
