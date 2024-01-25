@@ -8,27 +8,29 @@ function TodoListContent({ todoList, setTodoList, isActive }) {
   }
   const doneClick = (id) => {
     const newTodo = todoList.filter(() => isActive ? true : false).map((item) => {
-      return item.id === id ? { ...item, isDone: !isDone } : item
+      return item.id === id ? { ...item, isDone: !item.isDone } : item
     })
+    console.log('test');
     setTodoList(newTodo);
   }
 
   return (
-    <div className='todo-warp'>
+    <div className='todo-warp' key={todoList.id}>
       {
-        todoList.map((item) => {
-          return (
-            <div className='todo-list' key={item.id}>
-              <h2>{isActive ? 'Done' : 'Working'}</h2>
-              <h3>{item.title}</h3>
-              <p>{item.detail}</p>
-              <div>
-                <button onClick={() => removeHandler(item.id)}>삭제</button>
-                <button onClick={() => doneClick(item.id)}>{isActive ? '취소' : '완료'}</button>
+        todoList.filter((item) => isActive === item.isDone ? true : false)
+          .map((item) => {
+            return (
+              <div className='todo-list'>
+                <h2>{isActive ? 'Done' : 'Working'}</h2>
+                <h3>{item.title}</h3>
+                <p>{item.detail}</p>
+                <div>
+                  <button onClick={() => removeHandler(item.id)}>삭제</button>
+                  <button onClick={() => doneClick(item.id)}>{isActive ? '취소' : '완료'}</button>
+                </div>
               </div>
-            </div>
-          )
-        })
+            )
+          })
       }
     </div>
   )

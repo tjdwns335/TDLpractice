@@ -20,6 +20,14 @@ function Form({ todoList, setTodoList }) {
       detail,
       isDone: false,
     }
+    if (title === "") {
+      alert('제목을 다시 입력해주세요');
+      return
+    }
+    if (detail === "") {
+      alert('내용을 다시 입력해주세요');
+      return
+    }
     setTodoList([...todoList, newTodoList])
   }
   return (
