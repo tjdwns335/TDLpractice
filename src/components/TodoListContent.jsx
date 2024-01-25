@@ -7,7 +7,7 @@ function TodoListContent({ todoList, setTodoList, isActive }) {
     setTodoList(newTodoList);
   }
   const doneClick = (id) => {
-    const newTodo = todoList.filter(() => isActive ? true : false).map((item) => {
+    const newTodo = todoList.map((item) => {
       return item.id === id ? { ...item, isDone: !item.isDone } : item
     })
     console.log('test');
