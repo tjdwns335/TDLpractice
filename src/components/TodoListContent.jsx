@@ -20,7 +20,7 @@ function TodoListContent({ todoList, setTodoList, isActive }) {
         todoList.filter((item) => isActive === item.isDone ? true : false)
           .map((item) => {
             return (
-              <div className='todo-list'>
+              <div>
                 <h2>{isActive ? 'Done' : 'Working'}</h2>
                 <h3>{item.title}</h3>
                 <p>{item.detail}</p>
