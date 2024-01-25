@@ -3,8 +3,12 @@ import '../App.css'
 
 function TodoListContent({ todoList, setTodoList, isActive }) {
   const removeHandler = (id) => {
-    const newTodoList = todoList.filter((todoList) => todoList.id !== id);
-    setTodoList(newTodoList);
+    const userConfirmed = window.confirm("삭제하시겠습니까?");
+    if (userConfirmed) {
+      const newTodoList = todoList.filter((todoList) => todoList.id !== id);
+      setTodoList(newTodoList);
+    }
+
   }
   const doneClick = (id) => {
     const newTodo = todoList.map((item) => {
