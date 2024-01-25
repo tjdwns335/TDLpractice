@@ -10,7 +10,6 @@ function App() {
     { id: 2, title: 'test', detail: 'test', isDone: true },
   ]);
 
-
   return (
     <div className="basic">
       <Header></Header>
